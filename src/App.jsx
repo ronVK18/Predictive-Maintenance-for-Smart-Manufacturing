@@ -2,7 +2,8 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
-import MainDashBoard from "./Pages/MainDashBoard";
+
+import MainDashboard from "./Pages/MainDashBoard";
 import MachineDashboard from "./Pages/MachineDashboard";
 import Temp from "./Pages/Temp";
 import UserStaff from "./Pages/submaindash/UserStaff"
@@ -29,7 +30,8 @@ function App() {
         //     </PrivateRoute>
         //   ),
         // },
- 
+        // {
+        
        
       ],
     },
