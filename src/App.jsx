@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import MainDashBoard from "./Pages/MainDashBoard";
 import MachineDashboard from "./Pages/MachineDashboard";
 import Temp from "./Pages/Temp";
+import UserStaff from "./Pages/submaindash/UserStaff"
 function App() {
   const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ function App() {
     
         { path: "machine/:id", element: <MachineDashboard /> },
         { path: "temp", element: <Temp /> },
+        { path: "user/:userId", element: <UserStaff /> },
     
 
         // {

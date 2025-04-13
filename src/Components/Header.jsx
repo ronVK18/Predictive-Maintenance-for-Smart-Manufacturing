@@ -78,7 +78,7 @@ export default function Header() {
                   <span>Log In</span>
                 </a>
                 <a 
-                  href="#get-started" 
+                  href="/maindashboard" 
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-1 transition-all duration-200 transform hover:scale-105"
                 >
                   <span>Get Started</span>
@@ -127,7 +127,7 @@ export default function Header() {
                   Log In
                 </a>
                 <a 
-                  href="#get-started" 
+                  href="/maindashboard" 
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

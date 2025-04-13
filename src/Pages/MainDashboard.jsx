@@ -14,6 +14,7 @@ import Staff from './submaindash/Staff.jsx';
 import Map from './submaindash/map';
 import MachineList from './submaindash/machineList';
 import CreateMachine from './submaindash/CreateMachine';
+import FactCalendar from './submaindash/FactCalender.jsx';
 
 export default function MainDashboard() {
   const [activeTab, setActiveTab] = useState('machineryMap');
@@ -55,11 +56,11 @@ export default function MainDashboard() {
             
            
             <button 
-              onClick={() => setActiveTab('alerts')}
-              className={`flex items-center w-full p-3 mb-2 rounded-lg ${activeTab === 'alerts' ? 'bg-blue-900 bg-opacity-50' : 'hover:bg-gray-700'}`}
+              onClick={() => setActiveTab('cal')}
+              className={`flex items-center w-full p-3 mb-2 rounded-lg ${activeTab === 'cal' ? 'bg-blue-900 bg-opacity-50' : 'hover:bg-gray-700'}`}
             >
               <FaBell className="mr-3" />
-              <span>Alerts</span>
+              <span>Factory Task Calendar </span>
             </button>
             
             <button 
@@ -147,23 +148,8 @@ export default function MainDashboard() {
           )}
 
           {/* Alerts Tab */}
-          {activeTab === 'alerts' && (
-            <div className={fadeIn}>
-              <div className="backdrop-blur-md bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 shadow-lg text-center py-12">
-                <h3 className="text-2xl font-bold text-blue-400 mb-6">System Alerts</h3>
-                <div className="w-24 h-24 rounded-full bg-red-500 bg-opacity-20 flex items-center justify-center p-2 mx-auto">
-                  <div className="w-20 h-20 rounded-full bg-red-500 bg-opacity-30 flex items-center justify-center p-2">
-                    <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center">
-                      <FaExclamationTriangle className="text-4xl text-red-200" />
-                    </div>
-                  </div>
-                </div>
-                <h4 className="text-xl mt-8 mb-2">Welcome to System Alerts</h4>
-                <p className="text-gray-400 max-w-lg mx-auto">
-                  Monitor critical alerts and notifications from all connected systems
-                </p>
-              </div>
-            </div>
+          {activeTab === 'cal' && (
+            <FactCalendar/>
           )}
 
           {/* Staff Management Tab */}

@@ -15,6 +15,9 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
+import SmallMap from "./smallMap";
+import Machinelife from "./machinelife";
+import Model1 from "./Model1"
 
 export default function MachineDes() {
   const { id } = useParams();
@@ -22,6 +25,7 @@ export default function MachineDes() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [machineId , setMachineId] = useState(id);
   
   useEffect(() => {
     const fetchMachineDetail = async () => {
@@ -29,6 +33,8 @@ export default function MachineDes() {
         setLoading(true);
         const response = await axios.get(`http://localhost:3000/api/data/machinDetail/${id}`);
         setMachine(response.data);
+        setMachineId(response.data.id)
+        console.log(response.data)
         setError(null);
       } catch (err) {
         console.error("Error fetching machine details:", err);
@@ -150,6 +156,8 @@ export default function MachineDes() {
             </button>
           </div>
         </div>
+
+       
       </div>
     );
   }
@@ -334,9 +342,7 @@ export default function MachineDes() {
                   <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center">
                     <Truck className="mr-2 h-5 w-5" /> Schedule Maintenance
                   </button>
-                  <button className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg flex items-center">
-                    <Clock className="mr-2 h-5 w-5" /> View History
-                  </button>
+                  
                   <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg flex items-center">
                     <Truck className="mr-2 h-5 w-5" /> Request Service
                   </button>
@@ -345,7 +351,13 @@ export default function MachineDes() {
             </div>
           </div>
         </div>
+        <Model1/>
       </div>
+
+
+      <SmallMap latitude={Number(machine?.lati)} longitude={Number(machine?.lang)} name={machine?.name} locationName={machine?.location} photoUrl={machine?.image[0]}/>
+{machineId && <Machinelife machineId={Number(machineId)}/> }
+      
     </div>
   );
 }

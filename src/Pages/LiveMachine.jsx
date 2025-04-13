@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Activity, AlertTriangle, CheckCircle, Clock, Database, Server, BarChart2, ArrowRight, RefreshCw, FileText, ChevronDown, ChevronUp } from 'lucide-react';
 import AnaLoad from '../Components/AnaLoad';
+import axios from "axios"
 
 export default function PredictiveMaintenance() {
   const [data, setData] = useState([]);
@@ -18,31 +19,48 @@ export default function PredictiveMaintenance() {
   const [ana,setana]=useState(false);
 const [per, setper] =useState(0);
   // Fetch data on component mount and set up interval
+  // useEffect(() => {
+  //   fetchData();
+  //   const interval = setInterval(fetchData, 30 * 60 * 1000); // Refresh every 30 minutes
+    
+  //   // Countdown timer
+  //   const timer = setInterval(() => {
+  //     setCountdown(prev => {
+  //       if (prev <= 1) {
+  //         return 30 * 60; // Reset to 30 minutes
+  //       }
+  //       return prev - 1;
+  //     });
+  //   }, 1000);
+    
+  //   return () => {
+  //     clearInterval(interval);
+  //     clearInterval(timer);
+  //   };
+  // }, []);
+
+
   useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, 30 * 60 * 1000); // Refresh every 30 minutes
-    
-    // Countdown timer
-    const timer = setInterval(() => {
-      setCountdown(prev => {
-        if (prev <= 1) {
-          return 30 * 60; // Reset to 30 minutes
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    
-    return () => {
-      clearInterval(interval);
-      clearInterval(timer);
+    // Fetch data from backend
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/data/get-machine-data');
+        setData(response.data.data); // assuming response structure: { message, data: [...] }
+      } catch (error) {
+        console.error('Error fetching machine data:', error);
+      } finally {
+        setLoading(false);
+      }
     };
+
+    fetchData();
   }, []);
 
   const fetchData = async () => {
     setLoading(true);
     try {
       // In a real-world scenario, you would use the actual API endpoint
-      const response = await fetch('http://localhost:3000/api/data');
+      const response = await fetch('http://localhost:3000/api/data/generate-machine-data');
       
       // For demo purposes, simulate response if API is not available
       if (!response.ok) {
@@ -80,7 +98,8 @@ const [per, setper] =useState(0);
         setData(mockData);
       } else {
         const result = await response.json();
-        setData(result);
+        console.log(result)
+        
       }
       
       setLastUpdate(new Date());
